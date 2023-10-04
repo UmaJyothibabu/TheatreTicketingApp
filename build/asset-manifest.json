@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.27a9dcc8.css",
+    "main.js": "/static/js/main.e30c01f8.js",
+    "static/js/787.3a6c4c37.chunk.js": "/static/js/787.3a6c4c37.chunk.js",
+    "static/media/malayalam-movies-download-1.jpg": "/static/media/malayalam-movies-download-1.4886d03d4c07220a1a2c.jpg",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/index.html",
+    "main.27a9dcc8.css.map": "/static/css/main.27a9dcc8.css.map",
+    "main.e30c01f8.js.map": "/static/js/main.e30c01f8.js.map",
+    "787.3a6c4c37.chunk.js.map": "/static/js/787.3a6c4c37.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.27a9dcc8.css",
+    "static/js/main.e30c01f8.js"
+  ]
+}
