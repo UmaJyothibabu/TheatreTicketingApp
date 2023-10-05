@@ -13,7 +13,7 @@ const movieData = require("../Models/movie");
 const userData = require("../Models/user");
 const reviewData = require("../Models/review");
 const ticketData = require("../Models/ticket");
-
+const cloudinary = require("cloudinary").v2;
 const baseUrl = process.env.BASE_URL || "http://localhost:8000";
 
 router.use(express.json());
@@ -21,6 +21,11 @@ router.use(express.urlencoded({ extended: true }));
 const storage = multer.memoryStorage(); // Store the file in memory
 const upload = multer({ storage: storage });
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 // const storage = multer.diskStorage({
 //   destination: function (req, file, cb) {
 //     cb(null, "./uploads/"); // Specify the destination folder where uploaded files will be stored
@@ -49,7 +54,7 @@ router.post("/movie", upload.single("image"), auth, async (req, res) => {
       // req.body.image = JSON.parse(req.body.image);
 
       let image = req.files.image;
-      cloudinary.uploader.upload(image.tempFilePath, (error, result) => {
+      cloudinary.v2.uploader.upload(req.file.path, (error, result) => {
         if (error) {
           console.error(error);
           return res.status(500).json({ error: "Upload failed" });
