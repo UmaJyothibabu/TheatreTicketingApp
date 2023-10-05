@@ -180,18 +180,24 @@ const sendEmail = async (ticket) => {
     <p>Awesome movies</p>`,
   };
   console.log("hi");
-  console.log(message);
-  transporter
-    .sendMail(message)
-    .then(() => {
-      console.log("hello");
-      console.log("message sent");
-    })
-    .catch((error) => {
-      console.log("error");
-      console.log(error);
-      console.log("unable to send");
-    });
+  try {
+    const info = await transporter.sendMail(message);
+    console.log("Message sent: %s", info.messageId);
+  } catch (error) {
+    console.log(error);
+  }
+
+  // transporter
+  //   .sendMail(message)
+  //   .then(() => {
+  //     console.log("hello");
+  //     console.log("message sent");
+  //   })
+  //   .catch((error) => {
+  //     console.log("error");
+  //     console.log(error);
+  //     console.log("unable to send");
+  //   });
 };
 
 // ticket booking and email sending
