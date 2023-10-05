@@ -18,13 +18,13 @@ const PORT = process.env.PORT;
 const accountApi = require("./Routes/users");
 const customerApi = require("./Routes/customer");
 const adminApi = require("./Routes/admin");
-const sign_upload = require("./Routes/SignUpload");
+
 app.use("/uploads", express.static("uploads"));
 
 app.use("/api", accountApi); //routes for login and sign up
 app.use("/api", adminApi); //routes handling admin activities
 app.use("/api", customerApi); //routes handling customer activities
-app.use("/api", sign_upload);
+
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.mongodb_url);
