@@ -186,18 +186,6 @@ const sendEmail = async (ticket) => {
   } catch (error) {
     console.log(error);
   }
-
-  // transporter
-  //   .sendMail(message)
-  //   .then(() => {
-  //     console.log("hello");
-  //     console.log("message sent");
-  //   })
-  //   .catch((error) => {
-  //     console.log("error");
-  //     console.log(error);
-  //     console.log("unable to send");
-  //   });
 };
 
 // ticket booking and email sending
