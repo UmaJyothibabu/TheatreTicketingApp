@@ -13,62 +13,23 @@ const movieData = require("../Models/movie");
 const userData = require("../Models/user");
 const reviewData = require("../Models/review");
 const ticketData = require("../Models/ticket");
-const cloudinary = require("cloudinary").v2;
+// const cloudinary = require("cloudinary").v2;
 const baseUrl = process.env.BASE_URL || "http://localhost:8000";
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-const storage = multer.memoryStorage(); // Store the file in memory
-const upload = multer({ storage: storage });
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "./uploads/"); // Specify the destination folder where uploaded files will be stored
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, Date.now() + "-" + file.originalname); // Define the file name for uploaded files
-//   },
-// });
-
-// const upload = multer({ storage: storage });
 // // adding new movies
 
-router.post("/movie", upload.single("image"), auth, async (req, res) => {
+router.post("/movie", auth, async (req, res) => {
   try {
-    // console.log(req.body.role);
     if (req.body.role === "Admin") {
-      // console.log(req.body);
+      // // Now you can use result.secure_url as the image URL
+      // req.body.image = result.secure_url;
+      // req.body.cast = JSON.parse(req.body.cast);
+      // req.body.languages = JSON.parse(req.body.languages);
+      // req.body.genre = JSON.parse(req.body.genre);
 
-      // Access the uploaded file details via req.file
-      if (!req.file) {
-        return res.status(400).json({ message: "No image file received" });
-      }
-      // const webImagePath = imagePathFromDB.replace(/\\/g, '/');
-      // const imagePath = req.file.path.replace(/\\/g, "/");
-      // req.body.image = imagePath;
-      // req.body.image = JSON.parse(req.body.image);
-
-      let image = req.files.image;
-      cloudinary.v2.uploader.upload(req.file.path, (error, result) => {
-        if (error) {
-          console.error(error);
-          return res.status(500).json({ error: "Upload failed" });
-        }
-
-        // The image is now uploaded to Cloudinary, and you can access its URL in result.secure_url
-        // res.json({ imageUrl: result.secure_url });
-        console.log(result.secure_url);
-        image = result.secure_url;
-      });
-      req.body.image = image;
-      req.body.cast = req.body.cast = JSON.parse(req.body.cast);
-      req.body.languages = JSON.parse(req.body.languages);
-      req.body.genre = JSON.parse(req.body.genre);
       console.log(req.body);
       const newMovie = movieData(req.body);
 
@@ -79,7 +40,7 @@ router.post("/movie", upload.single("image"), auth, async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Unable  add movie data" });
+    res.status(500).json({ message: "Unable to add movie data" });
   }
 });
 
