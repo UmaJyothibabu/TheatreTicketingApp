@@ -18,9 +18,9 @@ router.get("/movie", async (req, res) => {
     let movies = await movieData.find();
 
     if (movies.length !== 0) {
-      const imgUrl = `${req.protocol}://${req.get("host")}/`;
+      // const imgUrl = `${req.protocol}://${req.get("host")}/`;
 
-      res.status(200).json({ movies: movies, imgUrl: imgUrl });
+      res.status(200).json(movies);
     } else {
       res.status(200).json({ message: "No movies to show" });
     }
