@@ -179,12 +179,15 @@ const sendMail = async (ticket) => {
     <p>Regards</p>
     <p>Awesome movies</p>`,
   };
+  console.log("hi");
   transporter
     .sendMail(message)
     .then(() => {
+      console.log("hello");
       console.log("message sent");
     })
     .catch((error) => {
+      console.log("error");
       console.log(error);
       console.log("unable to send");
     });
