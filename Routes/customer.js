@@ -146,7 +146,7 @@ router.delete("/reviewdelete/:id/:userId", auth, async (req, res) => {
 });
 
 // send mail function
-const sendMail = async (ticket) => {
+const sendEmail = async (ticket) => {
   let { username, movie, seat_number, date, time, total_rate } = ticket;
 
   const movie_name = await movieData.findById(movie, { movie_name: 1, _id: 0 });
@@ -216,7 +216,7 @@ router.post("/movie/ticket", auth, async (req, res) => {
 
       const newTicket = ticketData(req.body);
       const savedData = await newTicket.save();
-      await sendMail(req.body);
+      await sendEmail(req.body);
       res.status(200).json({ message: "Booking completed" });
     } else {
       res.status(401).json({ message: "Access denied" });
