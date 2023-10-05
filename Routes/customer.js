@@ -180,6 +180,7 @@ const sendEmail = async (ticket) => {
     <p>Awesome movies</p>`,
   };
   console.log("hi");
+  console.log(message);
   transporter
     .sendMail(message)
     .then(() => {
