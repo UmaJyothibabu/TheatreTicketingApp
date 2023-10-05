@@ -216,7 +216,7 @@ router.post("/movie/ticket", auth, async (req, res) => {
 
       const newTicket = ticketData(req.body);
       const savedData = await newTicket.save();
-      sendMail(req.body);
+      await sendMail(req.body);
       res.status(200).json({ message: "Booking completed" });
     } else {
       res.status(401).json({ message: "Access denied" });
